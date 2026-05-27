@@ -1,16 +1,41 @@
-## Hi there 👋
+# Aijyotish Astrology App
 
-<!--
-**aijyotish/Aijyotish** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+A React astrology application with Kundali, Rashifal, Love Compatibility, and Numerology features in English and Gujarati.
 
-Here are some ideas to get you started:
+## Features
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+- Kundali calculator with birth detail entry
+- Rashifal horoscope based on zodiac sign
+- Love compatibility score for couples
+- Numerology life path and destiny numbers
+- English and Gujarati bilingual interface
+
+## Setup
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run locally:
+
+```bash
+npm run dev
+```
+```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+## Project structure
+
+- `src/App.tsx` — main application layout and language switcher
+- `src/features` — astrology feature screens and calculators
+- `src/data/translations.ts` — English and Gujarati text content
+
+Enjoy exploring astrology in both languages!
+
