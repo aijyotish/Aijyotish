@@ -37,17 +37,13 @@ const Rashifal = ({ locale }: { locale: Locale }) => {
     setMessage('')
 
     try {
-      const rashiName = rashiLabels[rashi][locale]
-      const prompt = locale === 'en'
-        ? `Provide a detailed daily horoscope for ${rashiName}. Include: a short summary (2-3 sentences), lucky color, lucky number, lucky time of day, and brief predictions for Love, Career, Health, and Money. Keep language clear and practical.`
-        : `${rashiName} માટે વિગતવાર દૈનિક રાશિફળ આપો. સમાવિષ્ટ કરો: સંક્ષિપ્ત સારાંશ (2-3 વાક્ય), લકી કલર, લકી નંબર, દિવસનો સારો સમય, અને પ્રેમ, કારકિર્દી, તંદુરસ્તી અને વિકાસ માટે ટૂંકી આગાહીઓ. ભાષા સરળ અને પ્રયોગી રાખો.`
+      const rashiName = rashiLabels[rashi].gu
+      const prompt = `${rashiName} માટે વિગતવાર દૈનિક રાશિફળ આપો. સામેલ કરો: સંક્ષિપ્ત સારાંશ (2-3 વાક્ય), લકી કલર, લકી નંબર, દિવસનો સારો સમય, અને પ્રેમ, કારકિર્દી, તંદુરસ્તી અને પૈસા માટે ટૂંકી આગાહીઓ. તમામ જવાબ માત્ર ગુજરાતી લિપિમાં આપો. ભાષા સરળ અને પ્રયોગી રાખો.`
       
       const response = await callGroqAPI([
         {
           role: 'system',
-          content: locale === 'en'
-            ? 'You are a concise, practical astrology assistant. Provide structured output with labeled sections.'
-            : 'તમે સંક્ષિપ્ત અને પ્રયોગી જ્યોતિષ સહાયક છો. લેબલ કરવામાં આવેલા વિભાગો સાથે રચિત આઉટપુટ આપો.'
+          content: 'તમે સંક્ષિપ્ત અને પ્રયોગી જ્યોતિષ સહાયક છો. તમામ આઉટપુટ સંપૂર્ણ ગુજરાતી લિપિમાં આપો અને લેબલ થયેલા વિભાગો સાથે રચો.'
         },
         { role: 'user', content: prompt }
       ])

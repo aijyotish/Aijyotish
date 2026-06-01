@@ -35,10 +35,15 @@ const LoveCompatibility = ({ locale }: { locale: Locale }) => {
     if (!firstName || !secondName) return
     const currentScore = score ?? getCompatibilityScore(firstName, secondName, date1, date2)
     try {
-      const prompt = `Given two partners with the following details, produce a detailed love compatibility report and include a clear percentage score and a short summary of strengths, weaknesses, emotional compatibility, communication, sexual compatibility, long-term potential, and practical advice. Use the provided numeric score as the compatibility percentage: ${currentScore}.\n\nPartner A: ${firstName} (DOB: ${date1 || 'unknown'})\nPartner B: ${secondName} (DOB: ${date2 || 'unknown'})`
+      const prompt = `નીચે આપેલા બંને પાર્ટનર્સની વિગતોના આધારે વિગતવાર પ્રેમસંગતિ અહેવાલ આપો અને સ્પષ્ટ ટકાવારી સાથે સંક્ષિપ્ત સારાંશ રજૂ કરો: મજબૂતી, કમજોરી, ભાવનાત્મક સુમેલ, સંવાદ, સેક્સ્યુઅલ સુમેલ, લાંબા ગાળાનો સંભાવ અને પ્રયોગી સલાહ. આપેલ અંકિય સ્કોરને અનુકૂળતા ટકાવારી તરીકે ઉપયોગ કરો: ${currentScore}.
+
+ભાગીદાર A: ${firstName} (જન્મ તારીખ: ${date1 || 'અજાણી'})
+ભાગીદાર B: ${secondName} (જન્મ તારીખ: ${date2 || 'અજાણી'})
+
+બધા જવાબ માત્ર ગુજરાતી લિપિમાં આપો.`
 
       const response = await callGroqAPI([
-        { role: 'system', content: 'You are a thoughtful relationship analyst producing balanced, actionable compatibility readings.' },
+        { role: 'system', content: 'તમે વિચારશીલ સંબંધ વિશ્લેષક છો. સંપૂર્ણ રીતે ગુજરાતી લિપિમાં સંતુલિત અને ઉપયોગી સંયોગ રીડિંગ આપો.' },
         { role: 'user', content: prompt }
       ])
 

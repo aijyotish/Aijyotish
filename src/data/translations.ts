@@ -4,7 +4,7 @@ export const translations: Record<Locale, any> = {
   en: {
     app: {
       title: 'Aijyotish Astrology',
-      description: 'Explore Kundali, Rashifal, Love Compatibility, and Numerology in English and Gujarati.'
+      description: 'Explore Kundali, Rashifal, Love Compatibility, and Numerology in Gujarati.'
     },
     nav: {
       kundali: 'Kundali',
@@ -12,7 +12,7 @@ export const translations: Record<Locale, any> = {
       love: 'Love Compatibility',
       numerology: 'Numerology'
     },
-    footer: 'Created for astrology seekers with bilingual guidance.',
+    footer: 'Created for astrology seekers with Gujarati guidance.',
     kundali: {
       title: 'Kundali Calculator',
       description: 'Enter your birth details and get a simple Vedic-style chart summary.',
@@ -82,15 +82,15 @@ export const translations: Record<Locale, any> = {
   gu: {
     app: {
       title: 'આજ્યોટિશ astrology',
-      description: 'ગુજરાતી અને અંગ્રેજીમાં કુંડળી, રાશિફળ, લવ કમпатિબિલિટી અને ન્યુમેરોલોજી.'
+      description: 'ગુજરાતીમાં કુંડળી, રાશિફળ, લવ કોમ્પેટિબિલિટી, અને ન્યુમેરોલોજીનો અભ્યાસ કરો.'
     },
-    nav: {
+    nav: 
       kundali: 'કુંડળી',
       rashifal: 'રાશિફળ',
       love: 'લવ કોમ્પેટિબિલિટી',
       numerology: 'ન્યુમેરોલોજી'
     },
-    footer: 'બાઇલીંગ્વલ માર્ગદર્શન સાથેનું જ્યોતિષ એપ્લિકેશન.',
+    footer: 'ગુજરાતી માર્ગદર્શન સાથેનું જ્યોતિષ એપ્લિકેશન.',
     kundali: {
       title: 'કુંડળી કૅલ્ક્યુલેટર',
       description: 'જન્મ વિગતો દાખલ કરો અને સરળ વૈદિક શૈલીનું સારાંશ મેળવો.',

@@ -35,13 +35,11 @@ const Kundali = ({ locale }: { locale: Locale }) => {
           return
         }
 
-        const englishPrompt = `You are an expert Vedic astrologer. Given the following birth details, produce a very detailed Vedic kundali including: lagna (ascendant), rashi, nakshatra, exact planetary positions (with degrees and signs), detailed descriptions for all 12 houses, dasha periods overview, and life predictions for career, love, health, and wealth. Output a clearly labelled English section followed by a Gujarati section. Use precise astrological terms and provide practical advice. Birth details:\nName: ${name || 'N/A'}\nDate: ${date}\nTime: ${time}\nPlace: ${place}`
-
-        const gujaratiPrompt = `તમે একজন વૃદિક જ્યોતિષી છો. નીચેની જન્મ વિગતોની આધારે ખૂબ વિગતવાર વૈદિક કુંડળી આપો જેમાં સમાવેશ થવો જોઇએ: લગ્ન (ઍસેન્ડન્ટ), રાશિ, નક્ષત્ર, ગ્રહોની સાચી સ્થિતિ (ડિગ્રી અને રાશિ સાથે), બાર ઘરોનો વિગતવાર વર્ણન, દશા અવધિઓ સંક્ષિપ્ત બઝાર અને કારકિર્દી, પ્રેમ, તંદુરસ્તી, સંપત્તિ માટે જીવનભરની આગાહી. પહેલી અંગ્રેજી વિભાગ આપો અને પછી ગુજરાતી વિભાગ. જન્મ વિગતો:\nનામ: ${name || 'N/A'}\nતારીખ: ${date}\nસમય: ${time}\nસ્થળ: ${place}`
+        const prompt = `તમે એક નિષ્ણાત વૈદિક જ્યોતિષી છો. નીચેની જન્મ વિગતોની આધારે સંપૂર્ણ ગુજરાતી લિપિમાં ખૂબ વિગતવાર વૈદિક કુંડળી આપો જેમાં જમણવાર હોય: લગ્ન (ઍસેન્ડન્ટ), રાશિ, નક્ષત્ર, ગ્રહોની ચોક્કસ સ્થિતિ (ડિગ્રી અને રાશિ સાથે), બાર ઘરોનું વિગતવાર વર્ણન, દશા અવધિઓની સમીક્ષા અને કારકિર્દી, પ્રેમ, આરોગ્ય અને સંપત્તિ માટે જીવનની આગાહીઓ. તમામ આઉટપુટ માત્ર ગુજરાતી લિપિમાં આપો. જન્મ વિગતો:\nનામ: ${name || 'N/A'}\nતારીખ: ${date}\nસમય: ${time}\nસ્થળ: ${place}`
 
         const response = await callGroqAPI([
-          { role: 'system', content: 'You are a precise, conservative Vedic astrology assistant. Provide clear sections, avoid making unverifiable claims, and label language blocks.' },
-          { role: 'user', content: englishPrompt + '\n\n' + gujaratiPrompt }
+          { role: 'system', content: 'તમે એક ચોક્કસ અને વિશ્વસનીય વૈદિક જ્યોતિષ સહાયક છો. દરેક જવાબ સંપૂર્ણરૂપે ગુજરાતી લિપિમાં આપો અને સ્પષ્ટ વિભાગ સાથે રચો.' },
+          { role: 'user', content: prompt }
         ])
 
         setSummary(response)

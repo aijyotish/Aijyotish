@@ -48,10 +48,10 @@ const Numerology = ({ locale }: { locale: Locale }) => {
     if (!lp || !dt) return
     setLoading(true)
     try {
-      const prompt = `You are an expert numerologist. Given the Life Path number ${lp} and Destiny number ${dt}, provide a complete numerology reading: personality traits, career guidance, relationships, health considerations, year-by-year themes (next 5 years), lucky colors/numbers/dates, and practical advice. Keep the tone supportive and actionable.`
+      const prompt = `તમે એક નિષ્ણાત ન્યુમેરોલોજર છો. આપેલ લાઈફ પાથ નંબર ${lp} અને ડેસ્ટિની નંબર ${dt} માટે સંપૂર્ણ ગુજરાતી લિપિમાં ન્યુમેરોલોજી રીડિંગ આપો: વ્યક્તિત્વ લક્ષણો, કારકિર્દીની માર્ગદર્શન, સંબંધો, આરોગ્ય માટે વિચારણા, આગામી 5 વર્ષ માટે વર્ષવાર વિષયો, સારા રંગો/સંખ્યા/તારીખો, અને વ્યવહારુ સલાહ. ભાષા સહકારી અને ઉપયોગી રાખો.`
 
       const response = await callGroqAPI([
-        { role: 'system', content: 'You produce thorough and compassionate numerology reports.' },
+        { role: 'system', content: 'તમે સંપૂર્ણ અને દયાળુ ન્યુમેરોલોજી રિપોર્ટ પ્રસ્તુત કરો. બધું માત્ર ગુજરાતી લિપિમાં આપો.' },
         { role: 'user', content: prompt }
       ])
 
