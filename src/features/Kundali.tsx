@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { translations, type Locale } from '../data/translations'
+import { callGroqAPI } from '../utils/groqApi'
 
 const zodiacSigns = [
   'Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'
@@ -17,17 +18,39 @@ const Kundali = ({ locale }: { locale: Locale }) => {
   const [time, setTime] = useState('12:00')
   const [place, setPlace] = useState('')
   const [summary, setSummary] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const birthDate = new Date(date)
-    if (!date || Number.isNaN(birthDate.valueOf())) {
-      setSummary(t.note)
-      return
-    }
-    const sign = getZodiacSign(birthDate.getMonth() + 1, birthDate.getDate())
-    const energy = `${t.energy} ${sign}.`
-    setSummary(`${name ? `${name}, ` : ''}${energy} ${t.note}`)
+    setLoading(true)
+    setError('')
+    setSummary('')
+
+    ;(async () => {
+      try {
+        const birthDate = new Date(date)
+        if (!date || Number.isNaN(birthDate.valueOf())) {
+          setError(t.note)
+          return
+        }
+
+        const englishPrompt = `You are an expert Vedic astrologer. Given the following birth details, produce a very detailed Vedic kundali including: lagna (ascendant), rashi, nakshatra, exact planetary positions (with degrees and signs), detailed descriptions for all 12 houses, dasha periods overview, and life predictions for career, love, health, and wealth. Output a clearly labelled English section followed by a Gujarati section. Use precise astrological terms and provide practical advice. Birth details:\nName: ${name || 'N/A'}\nDate: ${date}\nTime: ${time}\nPlace: ${place}`
+
+        const gujaratiPrompt = `તમે একজন વૃદિક જ્યોતિષી છો. નીચેની જન્મ વિગતોની આધારે ખૂબ વિગતવાર વૈદિક કુંડળી આપો જેમાં સમાવેશ થવો જોઇએ: લગ્ન (ઍસેન્ડન્ટ), રાશિ, નક્ષત્ર, ગ્રહોની સાચી સ્થિતિ (ડિગ્રી અને રાશિ સાથે), બાર ઘરોનો વિગતવાર વર્ણન, દશા અવધિઓ સંક્ષિપ્ત બઝાર અને કારકિર્દી, પ્રેમ, તંદુરસ્તી, સંપત્તિ માટે જીવનભરની આગાહી. પહેલી અંગ્રેજી વિભાગ આપો અને પછી ગુજરાતી વિભાગ. જન્મ વિગતો:\nનામ: ${name || 'N/A'}\nતારીખ: ${date}\nસમય: ${time}\nસ્થળ: ${place}`
+
+        const response = await callGroqAPI([
+          { role: 'system', content: 'You are a precise, conservative Vedic astrology assistant. Provide clear sections, avoid making unverifiable claims, and label language blocks.' },
+          { role: 'user', content: englishPrompt + '\n\n' + gujaratiPrompt }
+        ])
+
+        setSummary(response)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to generate kundali')
+      } finally {
+        setLoading(false)
+      }
+    })()
   }
 
   return (
@@ -52,14 +75,21 @@ const Kundali = ({ locale }: { locale: Locale }) => {
           <input value={place} onChange={(event) => setPlace(event.target.value)} placeholder={t.place} />
         </label>
         <div className="form-actions">
-          <button type="submit">{t.submit}</button>
+          <button type="submit" disabled={loading}>{loading ? (locale === 'en' ? 'Generating...' : 'ઉત્પન્ન કરવામાં આવી રહ્યું છે...') : t.submit}</button>
         </div>
       </form>
+
+      {error && (
+        <div className="result-box" style={{ borderColor: '#e74c3c', backgroundColor: '#fadbd8' }}>
+          <h3>{locale === 'en' ? 'Error' : 'ભૂલ'}</h3>
+          <p>{error}</p>
+        </div>
+      )}
 
       {summary && (
         <div className="result-box">
           <h3>{t.result}</h3>
-          <p>{summary}</p>
+          <pre style={{ whiteSpace: 'pre-wrap' }}>{summary}</pre>
         </div>
       )}
     </section>

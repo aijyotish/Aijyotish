@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { translations, type Locale } from '../data/translations'
+import { callGroqAPI } from '../utils/groqApi'
 
 function getNameValue(name: string) {
   return name
@@ -28,6 +29,23 @@ const LoveCompatibility = ({ locale }: { locale: Locale }) => {
     event.preventDefault()
     const newScore = getCompatibilityScore(firstName, secondName, date1, date2)
     setScore(newScore)
+  }
+
+  const generateDetailedReport = async () => {
+    if (!firstName || !secondName) return
+    const currentScore = score ?? getCompatibilityScore(firstName, secondName, date1, date2)
+    try {
+      const prompt = `Given two partners with the following details, produce a detailed love compatibility report and include a clear percentage score and a short summary of strengths, weaknesses, emotional compatibility, communication, sexual compatibility, long-term potential, and practical advice. Use the provided numeric score as the compatibility percentage: ${currentScore}.\n\nPartner A: ${firstName} (DOB: ${date1 || 'unknown'})\nPartner B: ${secondName} (DOB: ${date2 || 'unknown'})`
+
+      const response = await callGroqAPI([
+        { role: 'system', content: 'You are a thoughtful relationship analyst producing balanced, actionable compatibility readings.' },
+        { role: 'user', content: prompt }
+      ])
+
+      return response
+    } catch (err) {
+      return err instanceof Error ? err.message : 'Failed to generate report'
+    }
   }
 
   const advice = score
@@ -75,6 +93,12 @@ const LoveCompatibility = ({ locale }: { locale: Locale }) => {
           <h3>{t.result}</h3>
           <p>{t.summary} {score}%</p>
           <p>{t.advice}: {advice}</p>
+          <div style={{ marginTop: 12 }}>
+            <button onClick={async () => {
+              const report = await generateDetailedReport()
+              alert(report)
+            }}>Detailed Report</button>
+          </div>
         </div>
       )}
     </section>

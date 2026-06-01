@@ -12,13 +12,27 @@ A React astrology application with Kundali, Rashifal, Love Compatibility, and Nu
 
 ## Setup
 
-Install dependencies:
+### 1. Install dependencies:
 
 ```bash
 npm install
 ```
 
-Run locally:
+### 2. Configure Groq API
+
+The Rashifal feature uses Groq API to generate dynamic horoscope readings. You need to set up your API key:
+
+1. Get your free API key from [Groq Console](https://console.groq.com/keys)
+2. Copy the `.env.example` file to `.env.local`:
+   ```bash
+   cp .env.example .env.local
+   ```
+3. Add your Groq API key to `.env.local`:
+   ```
+   VITE_GROQ_API_KEY=your_actual_api_key_here
+   ```
+
+### 3. Run locally:
 
 ```bash
 npm run dev

@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { translations, type Locale } from '../data/translations'
+import { callGroqAPI } from '../utils/groqApi'
 
 const lettersToNumber = (char: string) => {
   const value = char.toLowerCase().charCodeAt(0) - 96
@@ -40,6 +41,28 @@ const Numerology = ({ locale }: { locale: Locale }) => {
     setDestiny(dest || null)
   }
 
+  const [detailedReading, setDetailedReading] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  const fetchDetailedReading = async (lp: number | null, dt: number | null) => {
+    if (!lp || !dt) return
+    setLoading(true)
+    try {
+      const prompt = `You are an expert numerologist. Given the Life Path number ${lp} and Destiny number ${dt}, provide a complete numerology reading: personality traits, career guidance, relationships, health considerations, year-by-year themes (next 5 years), lucky colors/numbers/dates, and practical advice. Keep the tone supportive and actionable.`
+
+      const response = await callGroqAPI([
+        { role: 'system', content: 'You produce thorough and compassionate numerology reports.' },
+        { role: 'user', content: prompt }
+      ])
+
+      setDetailedReading(response)
+    } catch (err) {
+      setDetailedReading(err instanceof Error ? err.message : 'Failed to fetch reading')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   const insight = lifePath ? t.messages[lifePath] : ''
 
   return (
@@ -67,6 +90,15 @@ const Numerology = ({ locale }: { locale: Locale }) => {
           <p>{t.lifePath}: {lifePath}</p>
           <p>{t.destiny}: {destiny}</p>
           <p>{insight}</p>
+          <div style={{ marginTop: 12 }}>
+            <button onClick={() => fetchDetailedReading(lifePath, destiny)} disabled={loading}>{loading ? (locale === 'en' ? 'Loading...' : 'લોડ થઈ રહ્યું છે...') : 'Full Reading'}</button>
+          </div>
+
+          {detailedReading && (
+            <div style={{ marginTop: 12 }}>
+              <pre style={{ whiteSpace: 'pre-wrap' }}>{detailedReading}</pre>
+            </div>
+          )}
         </div>
       )}
     </section>
