@@ -10,7 +10,9 @@ export const translations: Record<Locale, any> = {
       kundali: 'Kundali',
       rashifal: 'Rashifal',
       love: 'Love Compatibility',
-      numerology: 'Numerology'
+      numerology: 'Numerology',
+      profile: 'Profile',
+      auth: 'Login / Signup'
     },
     footer: 'Created for astrology seekers with Gujarati guidance.',
     kundali: {
@@ -57,6 +59,29 @@ export const translations: Record<Locale, any> = {
       advice: 'Compatibility note',
       summary: 'Your connection score is'
     },
+    auth: {
+      title: 'Login or Sign Up',
+      description: 'Sign in or create a new account to save your readings and access your profile.',
+      email: 'Email Address',
+      password: 'Password',
+      loading: 'Loading...',
+      login: 'Login',
+      signup: 'Sign Up',
+      loginPrompt: 'Enter your credentials to sign in.',
+      signupPrompt: 'Create a new account to get started.',
+      switchToSignup: 'Create an account',
+      switchToLogin: 'Already have an account? Login',
+      google: 'Continue with Google'
+    },
+    profile: {
+      title: 'Your Profile',
+      signedInAs: 'Signed in as',
+      loading: 'Loading profile…',
+      noReadings: 'No saved readings yet.',
+      savedReadings: 'Saved Readings',
+      untitled: 'Untitled reading',
+      signOut: 'Sign Out'
+    },
     numerology: {
       title: 'Numerology',
       description: 'Discover your life path and destiny numbers from your name and date of birth.',
@@ -88,7 +113,9 @@ export const translations: Record<Locale, any> = {
       kundali: 'કુંડળી',
       rashifal: 'રાશિફળ',
       love: 'લવ કોમ્પેટિબિલિટી',
-      numerology: 'ન્યુમેરોલોજી'
+      numerology: 'ન્યુમેરોલોજી',
+      profile: 'પ્રોફાઇલ',
+      auth: 'લોગિન / સાઇનઅપ'
     },
     footer: 'ગુજરાતી માર્ગદર્શન સાથેનું જ્યોતિષ એપ્લિકેશન.',
     kundali: {
@@ -134,6 +161,29 @@ export const translations: Record<Locale, any> = {
       result: 'કોમ્પેટિબિલિટી સ્કોર',
       advice: 'સૂચન',
       summary: 'તમારો જોડાણ સ્કોર છે'
+    },
+    auth: {
+      title: 'લોગિન અથવા સાઇનઅપ',
+      description: 'તમારા રીડિંગ્સ સાચવવા અને પ્રોફાઇલ ઍક્સેસ કરવા માટે સાઇન ઇન અથવા નવું ખાતું બનાવો.',
+      email: 'ઇમેલ સરનામું',
+      password: 'પાસવર્ડ',
+      loading: 'લોડ થઈ રહ્યું છે...',
+      login: 'લોગિન',
+      signup: 'સાઇનઅપ',
+      loginPrompt: 'સાઇન ઇન કરવા માટે તમારા આધાર દાખલ કરો.',
+      signupPrompt: 'પ્રારંભ કરવા માટે નવું ખાતું બનાવો.',
+      switchToSignup: 'ખાતું બનાવો',
+      switchToLogin: 'પહેલું ખાતું છે? લોગિન',
+      google: 'ગૂગલથી આગળ વધો'
+    },
+    profile: {
+      title: 'તમારી પ્રોફાઇલ',
+      signedInAs: 'સાઇન ઇન તરીકે',
+      loading: 'પ્રોફાઇલ લોડ થઈ રહી છે…',
+      noReadings: 'અત્યારે કોઈ સેવ થયેલી રીડિંગ નથી.',
+      savedReadings: 'સેવ થયેલી રીડિંગ્સ',
+      untitled: 'નામ વિનાનું રીડિંગ',
+      signOut: 'સાઇન આઉટ'
     },
     numerology: {
       title: 'ન્યુમેરોલોજી',

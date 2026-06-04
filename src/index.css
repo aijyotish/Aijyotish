@@ -44,6 +44,13 @@ button {
   margin-bottom: 24px;
 }
 
+.header-action {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
 .app-header h1 {
   margin: 0 0 6px;
   font-size: clamp(2rem, 2.4vw, 2.6rem);
@@ -56,7 +63,8 @@ button {
 
 .language-switcher button,
 .app-nav button,
-.form-actions button {
+.form-actions button,
+.header-action button {
   border: 1px solid #444c56;
   background: #161b22;
   color: #f0f6fc;
@@ -67,6 +75,7 @@ button {
 
 .language-switcher button.active,
 .app-nav button.active,
+.header-action button.active,
 .form-actions button:hover {
   background: #238636;
   border-color: #2ea043;

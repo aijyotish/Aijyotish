@@ -135,6 +135,26 @@ function App() {
             ગુજરાતી
           </button>
         </div>
+
+        <div className="header-action">
+          {!user ? (
+            <button
+              type="button"
+              className={page === 'auth' ? 'active' : ''}
+              onClick={() => setPage('auth')}
+            >
+              {t.nav.auth}
+            </button>
+          ) : (
+            <button
+              type="button"
+              className={page === 'profile' ? 'active' : ''}
+              onClick={() => setPage('profile')}
+            >
+              {t.nav.profile}
+            </button>
+          )}
+        </div>
       </header>
 
       <nav className="app-nav">
