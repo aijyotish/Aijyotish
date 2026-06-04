@@ -33,7 +33,7 @@ function App() {
 
     initializeSession()
 
-    const { data: listener } = supabase.auth.onAuthStateChange((event, newSession) => {
+    const { data: listener } = supabase.auth.onAuthStateChange((event: string, newSession: Session | null) => {
       setSession(newSession)
       setUser(newSession?.user ?? null)
       if (!newSession && page === 'profile') {
@@ -164,7 +164,7 @@ function App() {
       </nav>
 
       <main className="app-main">
-        {page === 'kundali' && <Kundali locale={locale} userId={user?.id} />}
+        {page === 'kundali' && <Kundali locale={locale} />}
         {page === 'rashifal' && <Rashifal locale={locale} />}
         {page === 'love' && <LoveCompatibility locale={locale} />}
         {page === 'numerology' && <Numerology locale={locale} />}

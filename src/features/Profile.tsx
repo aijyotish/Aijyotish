@@ -29,7 +29,7 @@ const Profile = ({ locale, user }: ProfileProps) => {
       setLoading(true)
       setError('')
       const { data, error } = await supabase
-        .from<Reading>('kundali_readings')
+        .from('kundali_readings')
         .select('id,name,date,time,place,summary,created_at')
         .eq('user_id', user.id)
         .order('created_at', { ascending: false })
@@ -38,7 +38,7 @@ const Profile = ({ locale, user }: ProfileProps) => {
         setError(error.message)
         setReadings([])
       } else {
-        setReadings(data ?? [])
+        setReadings((data ?? []) as Reading[])
       }
       setLoading(false)
     }
